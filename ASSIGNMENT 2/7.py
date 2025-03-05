@@ -1,4 +1,5 @@
 Write a Python program to display a BST using In-order, Pre-order, Post-order. 
+
 class Node:
     def __init__(self, key):
         self.key = key
@@ -28,25 +29,32 @@ class BST:
                     return
                 current = current.right
     
-    def inorder_traversal(self):
-        stack = []
-        current = self.root
-        sorted_numbers = []
-        while True:
-            if current is not None:
-                stack.append(current)
-                current = current.left
-            elif stack:
-                current = stack.pop()
-                sorted_numbers.append(current.key)
-                current = current.right
-            else:
-                break
-        return sorted_numbers
+    def inorder_traversal(self, node):
+        if node:
+            self.inorder_traversal(node.left)
+            print(node.key, end=' ')
+            self.inorder_traversal(node.right)
+    
+    def preorder_traversal(self, node):
+        if node:
+            print(node.key, end=' ')
+            self.preorder_traversal(node.left)
+            self.preorder_traversal(node.right)
+    
+    def postorder_traversal(self, node):
+        if node:
+            self.postorder_traversal(node.left)
+            self.postorder_traversal(node.right)
+            print(node.key, end=' ')
     
     def display(self):
-        print("Sorted Sequence of Numbers:")
-        print(self.inorder_traversal())
+        print("In-order Traversal:")
+        self.inorder_traversal(self.root)
+        print("\nPre-order Traversal:")
+        self.preorder_traversal(self.root)
+        print("\nPost-order Traversal:")
+        self.postorder_traversal(self.root)
+        print()
 
 # Main function to process user input
 if __name__ == "__main__":
@@ -57,3 +65,5 @@ if __name__ == "__main__":
         bst.insert(num)
     
     bst.display()
+
+                    
