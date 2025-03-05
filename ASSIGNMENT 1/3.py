@@ -1,53 +1,17 @@
-class Node:
-def __init__(self, key):
-self.left = None
-self.right = None
-self.value = key
+Write a Python program to create a binary tree using array only and display the tree level
+wise.
 
-# Non-recursive insert using a queue
-def insert_non_recursive(root, key):
-new_node = Node(key)
-if root is None:
-return new_node
+class BinaryTree:
+def __init__(self, arr):
+self.tree = arr
 
-queue = [root]
-
-while queue:
-node = queue.pop(0)
-
-if not node.left:
-node.left = new_node
-return root
-else:
-queue.append(node.left)
-
-if not node.right:
-node.right = new_node
-return root
-else:
-queue.append(node.right)
-
-# Level-order traversal (breadth-first)
-def level_order_traversal(root):
-if root is None:
-return
-
-queue = [root]
-
-while queue:
-node = queue.pop(0)
-print(node.value, end=" ")
-
-if node.left:
-queue.append(node.left)
-if node.right:
-queue.append(node.right)
+def level_order_traversal(self):
+for value in self.tree:
+print(value, end=" ")
 
 # Example usage
-root = None
-values = [20, 10, 30, 5, 15, 25, 35]
-for val in values:
-root = insert_non_recursive(root, val)
+arr = [20, 10, 30, 5, 15, 25, 35]
+bt = BinaryTree(arr)
 
 print("Level-wise display of the tree:")
-level_order_traversal(root)
+bt.level_order_traversal()
